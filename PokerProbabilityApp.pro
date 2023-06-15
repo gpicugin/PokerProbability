@@ -14,11 +14,7 @@ SOURCES += \
     src/CalculatorOfProbability.cpp \
     src/main.cpp
 
-OTHER_FILES +=
-    translations/*.ts
-
-OTHER_FILES += \
-    qml/main.qml
+RESOURCES += qml.qrc
 
 
 TRANSLATIONS += \
@@ -40,5 +36,8 @@ include(common.pri)
 DEFINES += QT_QML_DEBUG_NO_WARNING
 
 QMAKE_POST_LINK += windeployqt.exe --qmldir $$QML_DIR $$DESTDIR/PokerProbabilityApp.exe
+
+RESOURCES += \
+    qml.qrc
 
 

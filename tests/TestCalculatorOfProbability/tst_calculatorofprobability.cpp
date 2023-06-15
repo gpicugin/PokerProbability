@@ -10,7 +10,7 @@ public:
     testCalculator();
     ~testCalculator();
 private:
-    void pushCardsToArray(QVector<Cards>& descCards, Cards card);
+    void pushCardsToArray(QVector<Cards>& tableCards, Cards card);
 private slots:
     void test_tryToCalculatePair_data();
     void test_tryToCalculatePair();
@@ -82,7 +82,6 @@ void testCalculator::test_tryToCalculatePair_data()
                                   << uncopen_card
                                   << uncopen_card
                                   << 1.0;
-
 }
 
 
@@ -102,15 +101,15 @@ void testCalculator::test_tryToCalculatePair()
     pushCardsToArray(handCards, firstHandCard);
     pushCardsToArray(handCards, secondHandCard);
 
-    QVector<Cards> descCards;
+    QVector<Cards> tableCards;
 
-    pushCardsToArray(descCards, firstFlop);
-    pushCardsToArray(descCards, secondFlop);
-    pushCardsToArray(descCards, thirdFlop);
-    pushCardsToArray(descCards, turn);
-    pushCardsToArray(descCards, river);
+    pushCardsToArray(tableCards, firstFlop);
+    pushCardsToArray(tableCards, secondFlop);
+    pushCardsToArray(tableCards, thirdFlop);
+    pushCardsToArray(tableCards, turn);
+    pushCardsToArray(tableCards, river);
 
-    QCOMPARE(calculator.CalculatePair(handCards, descCards), result);
+    QCOMPARE(calculator.CalculatePair(handCards, tableCards), result);
 }
 
 QTEST_APPLESS_MAIN(testCalculator)

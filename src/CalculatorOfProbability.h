@@ -74,12 +74,12 @@ class CalculatorOfProbability : public QObject
 public:
     explicit CalculatorOfProbability(QObject *parent = nullptr);
 
-    double CalculatePair(QVector<Cards> handCards, QVector<Cards> descCards);
+    double CalculatePair(QVector<Cards> handCards, QVector<Cards> tableCards);
 
 signals:
 
 private:
-    double tryToCalculatePair(QVector<Cards> handCards, QVector<Cards> descCards);
+    double tryToCalculatePair(QVector<Cards> handCards, QVector<Cards> tableCards);
 };
 
 #endif // CALCULATOROFPROBABILITY_H
