@@ -1,5 +1,6 @@
 QT += quick
 QT += testlib
+QT += core
 QT += qml quick widgets
 
 # You can make your code fail to compile if it uses deprecated APIs.

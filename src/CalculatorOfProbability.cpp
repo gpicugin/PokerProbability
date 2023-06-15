@@ -7,7 +7,7 @@ CalculatorOfProbability::CalculatorOfProbability(QObject *parent)
 
 }
 
-double CalculatorOfProbability::CalculatePair(QVector<int> handCards, QVector<int> descCards)
+double CalculatorOfProbability::CalculatePair(QVector<Cards> handCards, QVector<Cards> descCards)
 {
     double result = -1;
 
@@ -21,18 +21,25 @@ double CalculatorOfProbability::CalculatePair(QVector<int> handCards, QVector<in
     return result;
 }
 
-double CalculatorOfProbability::tryToCalculatePair(QVector<int> handCards, QVector<int> descCards)
+double CalculatorOfProbability::tryToCalculatePair(QVector<Cards> handCards, QVector<Cards> descCards)
 {
-    double result = 0;
+    double result = 3/51;
 
-    QVector<int> allCards = handCards + descCards;
+    QVector<Cards> allCards = handCards + descCards;
+    QSet<int> uniqueValues;
 
-    for(int i = 0; i < allCards.size(); i++) {
-        for(int j = i + 1; j < allCards.size(); j++) {
-            if(allCards[i] % 13 == allCards[j] % 13)
-                result =  1;
-        }
+    for(int i = 0; i < allCards.size(); i++)
+    {
+        int prevSize = uniqueValues.size();
+        uniqueValues << allCards[i] % 13;
+        if(uniqueValues.size() == prevSize)
+            return 1.0;
+        else
+            result = uniqueValues.size() * 3 / (52 - allCards.size());
     }
+
+    if(allCards.size() == 7 && uniqueValues.size() == 7)
+        result = 0.0;
 
     return result;
 }

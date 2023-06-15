@@ -10,7 +10,7 @@ public:
     testCalculator();
     ~testCalculator();
 private:
-    void pushDescCardsToDescArray(QVector<int>& descCards, int card);
+    void pushCardsToArray(QVector<Cards>& descCards, Cards card);
 private slots:
     void test_tryToCalculatePair_data();
     void test_tryToCalculatePair();
@@ -31,27 +31,57 @@ testCalculator::~testCalculator()
 
 }
 
-void testCalculator::pushDescCardsToDescArray(QVector<int>& descCards, int card)
+void testCalculator::pushCardsToArray(QVector<Cards>& array, Cards card)
 {
     if(card > 0 && card < 52)
-        descCards << card;
+        array << card;
 }
 
 void testCalculator::test_tryToCalculatePair_data()
 {
-    QTest::addColumn<int>("firstHandCard");
-    QTest::addColumn<int>("secondHandCard");
-    QTest::addColumn<int>("firstFlop");
-    QTest::addColumn<int>("secondFlop");
-    QTest::addColumn<int>("thirdFlop");
-    QTest::addColumn<int>("turn");
-    QTest::addColumn<int>("river");
+    QTest::addColumn<Cards>("firstHandCard");
+    QTest::addColumn<Cards>("secondHandCard");
+    QTest::addColumn<Cards>("firstFlop");
+    QTest::addColumn<Cards>("secondFlop");
+    QTest::addColumn<Cards>("thirdFlop");
+    QTest::addColumn<Cards>("turn");
+    QTest::addColumn<Cards>("river");
     QTest::addColumn<double>("result");
-    QTest::addRow("Pair of 10") << 8 << 21 << 1 << 15 << 17 << 33 << 48 << 1.0;
-    QTest::addRow("Nothing pair") << 0 << 1 << 2 << 3 << 4 << 5 << 6 << 0.0;
-    QTest::addRow("Preflop no pair") << 0 << 1 << -1 << -1 << -1 << -1 << -1 << 0.0;
-    QTest::addRow("Preflop pair") << 19 << 32 << -1 << -1 << -1 << -1 << -1 << 1.0;
 
+    QTest::addRow("Pair of 10") << clubs_10
+                                << diamonds_10
+                                << clubs_3
+                                << diamonds_4
+                                << diamonds_6
+                                << hearts_9
+                                << spades_jack
+                                << 1.0;
+
+    QTest::addRow("Nothing pair") << clubs_2
+                                  << clubs_3
+                                  << clubs_4
+                                  << clubs_5
+                                  << clubs_6
+                                  << clubs_7
+                                  << clubs_8
+                                  << 0.0;
+
+    QTest::addRow("Preflop no pair") << clubs_2
+                                     << clubs_3
+                                     << uncopen_card
+                                     << uncopen_card
+                                     << uncopen_card
+                                     << uncopen_card
+                                     << uncopen_card
+                                     << (double)(6/50);
+    QTest::addRow("Preflop pair") << diamonds_8
+                                  << hearts_8
+                                  << uncopen_card
+                                  << uncopen_card
+                                  << uncopen_card
+                                  << uncopen_card
+                                  << uncopen_card
+                                  << 1.0;
 
 }
 
@@ -59,25 +89,26 @@ void testCalculator::test_tryToCalculatePair_data()
 
 void testCalculator::test_tryToCalculatePair()
 {
-    QFETCH(int, firstHandCard);
-    QFETCH(int, secondHandCard);
-    QFETCH(int, firstFlop);
-    QFETCH(int, secondFlop);
-    QFETCH(int, thirdFlop);
-    QFETCH(int, turn);
-    QFETCH(int, river);
+    QFETCH(Cards, firstHandCard);
+    QFETCH(Cards, secondHandCard);
+    QFETCH(Cards, firstFlop);
+    QFETCH(Cards, secondFlop);
+    QFETCH(Cards, thirdFlop);
+    QFETCH(Cards, turn);
+    QFETCH(Cards, river);
     QFETCH(double, result);
 
-    QVector<int> handCards;
-    handCards << firstHandCard << secondHandCard;
+    QVector<Cards> handCards;
+    pushCardsToArray(handCards, firstHandCard);
+    pushCardsToArray(handCards, secondHandCard);
 
-    QVector<int> descCards;
+    QVector<Cards> descCards;
 
-    pushDescCardsToDescArray(descCards, firstFlop);
-    pushDescCardsToDescArray(descCards, secondFlop);
-    pushDescCardsToDescArray(descCards, thirdFlop);
-    pushDescCardsToDescArray(descCards, turn);
-    pushDescCardsToDescArray(descCards, river);
+    pushCardsToArray(descCards, firstFlop);
+    pushCardsToArray(descCards, secondFlop);
+    pushCardsToArray(descCards, thirdFlop);
+    pushCardsToArray(descCards, turn);
+    pushCardsToArray(descCards, river);
 
     QCOMPARE(calculator.CalculatePair(handCards, descCards), result);
 }
