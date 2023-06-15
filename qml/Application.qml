@@ -32,7 +32,12 @@ Window {
             }
 
             GradientStop {
-                position: 0.5
+                position: 0.33
+                color: Style.tableLightColor
+            }
+
+            GradientStop {
+                position: 0.66
                 color: Style.tableLightColor
             }
 
