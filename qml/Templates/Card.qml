@@ -246,7 +246,7 @@ Rectangle {
                 }},
 
 
-        State { name: "shirt" ; PropertyChanges {
+        State { name: "shirt_card" ; PropertyChanges {
                 target: _texture
                 source: "qrc:/Cards/Cards/red_joker.png"
                 }}

@@ -90,6 +90,7 @@ Rectangle
          MouseArea {
              anchors.fill: parent
              property int counter: 0
+             property var str
              onClicked: {
 
                 if(counter == 5) {
@@ -97,13 +98,10 @@ Rectangle
                     cardModel.clear()
                     return
                 }
-
-                cardModel.append({stateOfCard: "clubs_" + (counter + 2)})
-                console.log(cardModel.get(counter).index)
-
-
-
-
+                str = GameManager.getCurrentCardName()
+                console.log(str)
+                cardModel.append({stateOfCard: str})
+                console.log(counter)
                 counter = counter + 1;
             }
         }

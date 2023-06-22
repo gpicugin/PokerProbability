@@ -1,6 +1,7 @@
 
 #ifndef ENUMOFCARDS_H
 #define ENUMOFCARDS_H
+#include <QString>
 enum Card {
 
 
@@ -60,7 +61,10 @@ enum Card {
     spades_king = 50,
     spades_ace = 51,
     shirt_card = 52,
-    uncopen_card = 53,
+    unopen_card = 53,
     size = 54
 };
+
+QString CardToString(Card card);
+
 #endif // ENUMOFCARDS_H

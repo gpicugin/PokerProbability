@@ -1,6 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
+#include <QQmlContext>
 #include <QLocale>
 #include <QTranslator>
 
@@ -30,13 +30,18 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/qml/qml/Application.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-        &app, [url](QObject *obj, const QUrl &objUrl) {
-            if (!obj && url == objUrl)
-                QCoreApplication::exit(-1);
-        }, Qt::QueuedConnection);
+    QObject::connect(&engine,
+                     &QQmlApplicationEngine::objectCreated,
+                     &app,
+                     [url](QObject *obj, const QUrl &objUrl)
+                    {
+                        if (!obj && url == objUrl)
+                        QCoreApplication::exit(-1);
+                    }, Qt::QueuedConnection);
 
     GameManager gameManager;
+
+    engine.rootContext()->setContextProperty("GameManager", &gameManager);
 
 
     engine.load(url);

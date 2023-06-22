@@ -14,6 +14,7 @@ HEADERS += \
 
 SOURCES += \
     src/CalculatorOfProbability.cpp \
+    src/EnumOfCards.cpp \
     src/GameManager.cpp \
     src/main.cpp
 
