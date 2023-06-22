@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import "../qml/StyleSettings"
-
+import "../qml/Templates"
 
 Window {
     id: root
@@ -11,42 +11,17 @@ Window {
     title: qsTr("Poker Analiser")
     color: Style.backgroundColor
 
-    Rectangle
+    Table
     {
         id: _table
-        color: Style.tableDarkColor
-        radius: 300
-        border.color: Style.tableBorderColor
-
         anchors.centerIn: parent
 
-
         width: root.width * 0.7
-        height: root.height * 0.5
-
-        border.width: 10
-        gradient: Gradient {
-            GradientStop {
-                position: 0
-                color: Style.tableDarkColor
-            }
-
-            GradientStop {
-                position: 0.33
-                color: Style.tableLightColor
-            }
-
-            GradientStop {
-                position: 0.66
-                color: Style.tableLightColor
-            }
-
-            GradientStop {
-                position: 1
-                color: Style.tableDarkColor
-            }
-            orientation: Gradient.Vertical
-        }
-
+        height: root.height * 0.5        
     }
+
+//    Card {
+//        anchors.centerIn: _table
+//        height: _table.height * 0.3
+//    }
 }

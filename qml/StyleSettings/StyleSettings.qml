@@ -8,7 +8,7 @@ QtObject {
 
     property color tableDarkColor: "#042c04";
     property color tableLightColor: "#26ca26";
-    property color tableBorderColor: "#936d29";
+    property color tableBorderColor: "#473413";
 
 
 }

@@ -8,17 +8,16 @@ QT += qml quick widgets
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    src/CalculatorOfProbability.h
+    src/CalculatorOfProbability.h \
+    src/EnumOfCards.h \
+    src/GameManager.h
 
 SOURCES += \
     src/CalculatorOfProbability.cpp \
+    src/GameManager.cpp \
     src/main.cpp
 
 RESOURCES += qml.qrc
-
-
-TRANSLATIONS += \
-    translations/PokerProbability_ru_RU.ts
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH +=

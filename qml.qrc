@@ -66,11 +66,16 @@
         <file>Cards/queen_of_hearts2.png</file>
         <file>Cards/queen_of_spades.png</file>
         <file>Cards/queen_of_spades2.png</file>
+        <file>Cards/red_joker.png</file>
     </qresource>
     <qresource prefix="/qml">
         <file>qml/Application.qml</file>
         <file>qml/StyleSettings/qmldir</file>
         <file>qml/StyleSettings/StyleSettings.qml</file>
+        <file>qml/Templates/Card.qml</file>
+        <file>qml/Templates/qmldir</file>
+        <file>qml/Templates/Table.qml</file>
+        <file>qml/Templates/ArrayOfCards.qml</file>
     </qresource>
     <qresource prefix="/translations">
         <file>translations/PokerProbability_ru_RU.ts</file>

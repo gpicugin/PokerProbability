@@ -10,7 +10,7 @@ public:
     testCalculator();
     ~testCalculator();
 private:
-    void pushCardsToArray(QVector<Cards>& tableCards, Cards card);
+    void pushCardsToArray(QVector<Card>& tableCards, Card card);
 private slots:
     void test_tryToCalculatePair_data();
     void test_tryToCalculatePair();
@@ -31,7 +31,7 @@ testCalculator::~testCalculator()
 
 }
 
-void testCalculator::pushCardsToArray(QVector<Cards>& array, Cards card)
+void testCalculator::pushCardsToArray(QVector<Card>& array, Card card)
 {
     if(card > 0 && card < 52)
         array << card;
@@ -39,13 +39,13 @@ void testCalculator::pushCardsToArray(QVector<Cards>& array, Cards card)
 
 void testCalculator::test_tryToCalculatePair_data()
 {
-    QTest::addColumn<Cards>("firstHandCard");
-    QTest::addColumn<Cards>("secondHandCard");
-    QTest::addColumn<Cards>("firstFlop");
-    QTest::addColumn<Cards>("secondFlop");
-    QTest::addColumn<Cards>("thirdFlop");
-    QTest::addColumn<Cards>("turn");
-    QTest::addColumn<Cards>("river");
+    QTest::addColumn<Card>("firstHandCard");
+    QTest::addColumn<Card>("secondHandCard");
+    QTest::addColumn<Card>("firstFlop");
+    QTest::addColumn<Card>("secondFlop");
+    QTest::addColumn<Card>("thirdFlop");
+    QTest::addColumn<Card>("turn");
+    QTest::addColumn<Card>("river");
     QTest::addColumn<double>("result");
 
     QTest::addRow("Pair of 10") << clubs_10
@@ -88,20 +88,20 @@ void testCalculator::test_tryToCalculatePair_data()
 
 void testCalculator::test_tryToCalculatePair()
 {
-    QFETCH(Cards, firstHandCard);
-    QFETCH(Cards, secondHandCard);
-    QFETCH(Cards, firstFlop);
-    QFETCH(Cards, secondFlop);
-    QFETCH(Cards, thirdFlop);
-    QFETCH(Cards, turn);
-    QFETCH(Cards, river);
+    QFETCH(Card, firstHandCard);
+    QFETCH(Card, secondHandCard);
+    QFETCH(Card, firstFlop);
+    QFETCH(Card, secondFlop);
+    QFETCH(Card, thirdFlop);
+    QFETCH(Card, turn);
+    QFETCH(Card, river);
     QFETCH(double, result);
-
-    QVector<Cards> handCards;
+    
+    QVector<Card> handCards;
     pushCardsToArray(handCards, firstHandCard);
     pushCardsToArray(handCards, secondHandCard);
-
-    QVector<Cards> tableCards;
+    
+    QVector<Card> tableCards;
 
     pushCardsToArray(tableCards, firstFlop);
     pushCardsToArray(tableCards, secondFlop);
