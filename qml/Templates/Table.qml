@@ -9,7 +9,7 @@ Rectangle
     border.color: Style.tableBorderColor
     signal indexChanged
     anchors.centerIn: parent
-
+    property alias _cardModel: _cardModel
 
     width: 300
     height: 100
@@ -39,7 +39,7 @@ Rectangle
     }
 
     ListModel {
-        id: cardModel        
+        id: _cardModel
     } 
 
 
@@ -55,11 +55,13 @@ Rectangle
         ListView {
             id: cardView
             anchors {
-                fill: parent
+                centerIn: parent
             }
-            spacing: parent.height * 500/726 / 7
+            height: root.height * 0.33
+            width: (_cardModel.count === 1) ? 500/726 * height : _cardModel.count * 500/726 * height + (_cardModel.count - 1) * 500/726 * height * 0.2
+            spacing: parent.height * 500/726 * 0.2
             orientation: ListView.Horizontal
-            model: cardModel
+            model: _cardModel
 
             delegate: Card {
                 id: _delegte
@@ -68,43 +70,15 @@ Rectangle
         }
     }
 
-
-    Rectangle {
-        id: button
-
-        width: 100
-        height: 40
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: root.bottom
-        border {
-            color: "white"
-            width: 1
-        }
-
-        Text {
-            anchors.centerIn: parent
-            renderType: Text.NativeRendering
-            text: "Add"
-        }
-
-         MouseArea {
-             anchors.fill: parent
-             property int counter: 0
-             property var str
-             onClicked: {
-
-                if(counter == 5) {
-                    counter = 0
-                    cardModel.clear()
-                    return
-                }
-                str = GameManager.getCurrentCardName()
-                console.log(str)
-                cardModel.append({stateOfCard: str})
-                console.log(counter)
-                counter = counter + 1;
-            }
-        }
+    function getNextTableCard()
+    {
+        _cardModel.append({stateOfCard: GameManager.getCurrentCardName()})
     }
- }
+    function clearTable()
+    {
+        _cardModel.clear()
+    }
+
+}
+
 

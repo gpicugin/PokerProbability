@@ -19,9 +19,9 @@ GameManager::~GameManager()
 
 QString GameManager::getCurrentCardName()
 {
-    qDebug() << __PRETTY_FUNCTION__;
+    //qDebug() << __PRETTY_FUNCTION__;
     pullNewCardFromDesc();
-    qDebug() << CardToString(m_currentCard);
+    //qDebug() << CardToString(m_currentCard);
 
     return CardToString(m_currentCard);
 }

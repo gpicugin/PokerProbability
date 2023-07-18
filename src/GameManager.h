@@ -10,7 +10,6 @@
 class GameManager : public QObject
 {
     Q_OBJECT
-    //Q_PROPERTY(QString cardName READ getCurrentCardName  NOTIFY currentCardChanged)
 public:
     explicit GameManager(QObject *parent = nullptr);
     ~GameManager();
@@ -25,7 +24,7 @@ private:
 
 
 signals:
-    void currentCardChanged();
+    Q_INVOKABLE void doNextStep();
 };
 
 #endif // GAMEMANAGER_H
