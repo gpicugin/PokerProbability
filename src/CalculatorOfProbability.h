@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QVector>
 #include <QSet>
-#include <EnumOfCards.h>
+#include "EnumOfCards.h"
 
 
 

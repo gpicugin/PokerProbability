@@ -1,4 +1,3 @@
-
 #ifndef ENUMOFCARDS_H
 #define ENUMOFCARDS_H
 #include <QString>

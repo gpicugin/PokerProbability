@@ -38,8 +38,9 @@ Window {
         width: 100
         height: 40
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: root.top
+        anchors.bottom: parent.bottom
         property int counter: 0
+        text: "Start1"
         onClicked: {
             if(counter == 0)
             {
@@ -67,7 +68,6 @@ Window {
                 _table.clearTable()
                 counter = 0
             }
-
         }
     }
 }

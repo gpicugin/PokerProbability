@@ -68,19 +68,19 @@ void testCalculator::test_tryToCalculatePair_data()
 
     QTest::addRow("Preflop no pair") << clubs_2
                                      << clubs_3
-                                     << uncopen_card
-                                     << uncopen_card
-                                     << uncopen_card
-                                     << uncopen_card
-                                     << uncopen_card
+                                     << unopen_card
+                                     << unopen_card
+                                     << unopen_card
+                                     << unopen_card
+                                     << unopen_card
                                      << (double)(6/50);
     QTest::addRow("Preflop pair") << diamonds_8
                                   << hearts_8
-                                  << uncopen_card
-                                  << uncopen_card
-                                  << uncopen_card
-                                  << uncopen_card
-                                  << uncopen_card
+                                  << unopen_card
+                                  << unopen_card
+                                  << unopen_card
+                                  << unopen_card
+                                  << unopen_card
                                   << 1.0;
 }
 

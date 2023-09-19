@@ -2,7 +2,7 @@ pragma Singleton
 import QtQuick 2.15
 import QtQml 2.15
 
-QtObject {
+Item {
     id: root
     property color backgroundColor: "#1c2739";
 
