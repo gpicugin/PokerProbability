@@ -5,7 +5,7 @@
 #include <QTranslator>
 
 #include "GameManager.h"
-
+#include "CardClass.h"
 int main(int argc, char *argv[])
 {
     if (qEnvironmentVariableIsEmpty("QTGLESSTREAM_DISPLAY")) {
@@ -17,6 +17,8 @@ int main(int argc, char *argv[])
 #endif
     }
     QGuiApplication app(argc, argv);
+
+    CardClass::declareQML();
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

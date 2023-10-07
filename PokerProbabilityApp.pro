@@ -1,4 +1,3 @@
-QT += quick
 QT += testlib
 QT += core
 QT += qml quick widgets
@@ -9,16 +8,17 @@ QT += qml quick widgets
 
 HEADERS += \
     src/CalculatorOfProbability.h \
-    src/EnumOfCards.h \
+    src/CardClass.h \
     src/GameManager.h
 
 SOURCES += \
     src/CalculatorOfProbability.cpp \
-    src/EnumOfCards.cpp \
+    src/CardClass.cpp \
     src/GameManager.cpp \
     src/main.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += \
+    qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH +=
@@ -35,9 +35,7 @@ include(common.pri)
 
 DEFINES += QT_QML_DEBUG_NO_WARNING
 
-QMAKE_POST_LINK += windeployqt.exe --qmldir $$QML_DIR $$DESTDIR/PokerProbabilityApp.exe
+#QMAKE_POST_LINK += windeployqt.exe --qmldir $$QML_DIR $$DESTDIR/PokerProbabilityApp.exe
 
-RESOURCES += \
-    qml.qrc
 
 

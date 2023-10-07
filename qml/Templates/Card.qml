@@ -3,11 +3,6 @@ import QtQml 2.15
 
 Rectangle {
 
-//    Connections {
-//        target: Table
-//        function
-//    }
-
     id: root
     height: 300
     width: 500/726 * height
@@ -19,15 +14,17 @@ Rectangle {
     color: "white"
     property int index: 52
 
-    state: stateOfCard
+    Image {
+        id: _texture
+        anchors.centerIn: parent
 
-    function setState() {
-        console.log("hello_2")
-        console.log(index)
+        fillMode: Image.Stretch
 
-        stateOfCard = states[index].name
+        height: parent.height * 0.93
+        width: 500/726 * height
     }
 
+    state: stateOfCard
     states: [
 
         State { name: "clubs_2"; PropertyChanges {
@@ -246,21 +243,11 @@ Rectangle {
                 }},
 
 
-        State { name: "shirt_card" ; PropertyChanges {
+        State { name: "shirt_card"; PropertyChanges {
                 target: _texture
                 source: "qrc:/Cards/red_joker.png"
                 }}
     ]
 
-    Image {
-        id: _texture
-        anchors.centerIn: parent
 
-
-
-        fillMode: Image.Stretch
-
-        height: parent.height * 0.93
-        width: 500/726 * height
-    }
 }

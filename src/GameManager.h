@@ -5,7 +5,7 @@
 
 #include <QObject>
 #include <QSet>
-#include "EnumOfCards.h"
+#include "CardClass.h"
 
 class GameManager : public QObject
 {

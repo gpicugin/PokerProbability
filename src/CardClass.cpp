@@ -1,4 +1,4 @@
-#include "EnumOfCards.h"
+#include "CardClass.h"
 #include<QDebug>
 
 
@@ -69,3 +69,8 @@ QString CardToString(Card card)
     }
 }
 
+
+CardClass::CardClass()
+{
+
+}

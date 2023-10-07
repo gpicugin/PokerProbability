@@ -4,10 +4,7 @@
 #include <QObject>
 #include <QVector>
 #include <QSet>
-#include "EnumOfCards.h"
-
-
-
+#include "CardClass.h"
 
 class CalculatorOfProbability : public QObject
 {

@@ -17,8 +17,6 @@ private slots:
 
 private:
     CalculatorOfProbability calculator;
-
-
 };
 
 testCalculator::testCalculator()
@@ -48,39 +46,39 @@ void testCalculator::test_tryToCalculatePair_data()
     QTest::addColumn<Card>("river");
     QTest::addColumn<double>("result");
 
-    QTest::addRow("Pair of 10") << clubs_10
-                                << diamonds_10
-                                << clubs_3
-                                << diamonds_4
-                                << diamonds_6
-                                << hearts_9
-                                << spades_jack
+    QTest::addRow("Pair of 10") << Card::clubs_10
+                                << Card::diamonds_10
+                                << Card::clubs_3
+                                << Card::diamonds_4
+                                << Card::diamonds_6
+                                << Card::hearts_9
+                                << Card::spades_jack
                                 << 1.0;
 
-    QTest::addRow("Nothing pair") << clubs_2
-                                  << clubs_3
-                                  << clubs_4
-                                  << clubs_5
-                                  << clubs_6
-                                  << clubs_7
-                                  << clubs_8
+    QTest::addRow("Nothing pair") << Card::clubs_2
+                                  << Card::clubs_3
+                                  << Card::clubs_4
+                                  << Card::clubs_5
+                                  << Card::clubs_6
+                                  << Card::clubs_7
+                                  << Card::clubs_8
                                   << 0.0;
 
-    QTest::addRow("Preflop no pair") << clubs_2
-                                     << clubs_3
-                                     << unopen_card
-                                     << unopen_card
-                                     << unopen_card
-                                     << unopen_card
-                                     << unopen_card
+    QTest::addRow("Preflop no pair") << Card::clubs_2
+                                     << Card::clubs_3
+                                     << Card::unopen_card
+                                     << Card::unopen_card
+                                     << Card::unopen_card
+                                     << Card::unopen_card
+                                     << Card::unopen_card
                                      << (double)(6/50);
-    QTest::addRow("Preflop pair") << diamonds_8
-                                  << hearts_8
-                                  << unopen_card
-                                  << unopen_card
-                                  << unopen_card
-                                  << unopen_card
-                                  << unopen_card
+    QTest::addRow("Preflop pair") << Card::diamonds_8
+                                  << Card::hearts_8
+                                  << Card::unopen_card
+                                  << Card::unopen_card
+                                  << Card::unopen_card
+                                  << Card::unopen_card
+                                  << Card::unopen_card
                                   << 1.0;
 }
 
@@ -113,5 +111,4 @@ void testCalculator::test_tryToCalculatePair()
 }
 
 QTEST_APPLESS_MAIN(testCalculator)
-
 #include "tst_calculatorOfProbability.moc"

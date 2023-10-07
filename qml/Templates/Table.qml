@@ -64,7 +64,7 @@ Rectangle
             model: _cardModel
 
             delegate: Card {
-                id: _delegte
+                id: _delegate
                 height: root.height * 0.33
             }
         }

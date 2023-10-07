@@ -28,6 +28,7 @@ Window {
             horizontalCenter: parent.horizontalCenter
             verticalCenter: _table.bottom
         }
+        visible: false
 
         height: _table.height * 0.33
     }
@@ -40,11 +41,12 @@ Window {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         property int counter: 0
-        text: "Start1"
+        text: "Start"
         onClicked: {
             if(counter == 0)
             {
                 _hand.getHand()
+                _hand.visible = true
                 counter += 2
             }
             else if(counter == 2)
@@ -67,6 +69,7 @@ Window {
             else {
                 _table.clearTable()
                 counter = 0
+                _hand.visible = false
             }
         }
     }
