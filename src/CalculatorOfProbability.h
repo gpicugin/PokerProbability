@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QVector>
 #include <QSet>
-#include "CardClass.h"
+#include "Cards.h"
 
 class CalculatorOfProbability : public QObject
 {
@@ -12,12 +12,13 @@ class CalculatorOfProbability : public QObject
 public:
     explicit CalculatorOfProbability(QObject *parent = nullptr);
 
-    double CalculatePair(QVector<Card> handCards, QVector<Card> tableCards);
+public slots:
+    double CalculatePair(QVector<CardNumber> handCards, QVector<CardNumber> tableCards);
 
 signals:
 
 private:
-    double tryToCalculatePair(QVector<Card> handCards, QVector<Card> tableCards);
+    double tryToCalculatePair(QVector<CardNumber> handCards, QVector<CardNumber> tableCards);
 };
 
 #endif // CALCULATOROFPROBABILITY_H

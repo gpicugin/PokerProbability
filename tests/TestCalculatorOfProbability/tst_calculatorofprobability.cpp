@@ -10,7 +10,7 @@ public:
     testCalculator();
     ~testCalculator();
 private:
-    void pushCardsToArray(QVector<Card>& tableCards, Card card);
+    void pushCardsToArray(QVector<CardNumber>& tableCards, CardNumber card);
 private slots:
     void test_tryToCalculatePair_data();
     void test_tryToCalculatePair();
@@ -29,7 +29,7 @@ testCalculator::~testCalculator()
 
 }
 
-void testCalculator::pushCardsToArray(QVector<Card>& array, Card card)
+void testCalculator::pushCardsToArray(QVector<CardNumber>& array, CardNumber card)
 {
     if(card > 0 && card < 52)
         array << card;
@@ -37,48 +37,48 @@ void testCalculator::pushCardsToArray(QVector<Card>& array, Card card)
 
 void testCalculator::test_tryToCalculatePair_data()
 {
-    QTest::addColumn<Card>("firstHandCard");
-    QTest::addColumn<Card>("secondHandCard");
-    QTest::addColumn<Card>("firstFlop");
-    QTest::addColumn<Card>("secondFlop");
-    QTest::addColumn<Card>("thirdFlop");
-    QTest::addColumn<Card>("turn");
-    QTest::addColumn<Card>("river");
+    QTest::addColumn<CardNumber>("firstHandCard");
+    QTest::addColumn<CardNumber>("secondHandCard");
+    QTest::addColumn<CardNumber>("firstFlop");
+    QTest::addColumn<CardNumber>("secondFlop");
+    QTest::addColumn<CardNumber>("thirdFlop");
+    QTest::addColumn<CardNumber>("turn");
+    QTest::addColumn<CardNumber>("river");
     QTest::addColumn<double>("result");
 
-    QTest::addRow("Pair of 10") << Card::clubs_10
-                                << Card::diamonds_10
-                                << Card::clubs_3
-                                << Card::diamonds_4
-                                << Card::diamonds_6
-                                << Card::hearts_9
-                                << Card::spades_jack
+    QTest::addRow("Pair of 10") << CardNumber::clubs_10
+                                << CardNumber::diamonds_10
+                                << CardNumber::clubs_3
+                                << CardNumber::diamonds_4
+                                << CardNumber::diamonds_6
+                                << CardNumber::hearts_9
+                                << CardNumber::spades_jack
                                 << 1.0;
 
-    QTest::addRow("Nothing pair") << Card::clubs_2
-                                  << Card::clubs_3
-                                  << Card::clubs_4
-                                  << Card::clubs_5
-                                  << Card::clubs_6
-                                  << Card::clubs_7
-                                  << Card::clubs_8
+    QTest::addRow("Nothing pair") << CardNumber::clubs_2
+                                  << CardNumber::clubs_3
+                                  << CardNumber::clubs_4
+                                  << CardNumber::clubs_5
+                                  << CardNumber::clubs_6
+                                  << CardNumber::clubs_7
+                                  << CardNumber::clubs_8
                                   << 0.0;
 
-    QTest::addRow("Preflop no pair") << Card::clubs_2
-                                     << Card::clubs_3
-                                     << Card::unopen_card
-                                     << Card::unopen_card
-                                     << Card::unopen_card
-                                     << Card::unopen_card
-                                     << Card::unopen_card
+    QTest::addRow("Preflop no pair") << CardNumber::clubs_2
+                                     << CardNumber::clubs_3
+                                     << CardNumber::unopen_card
+                                     << CardNumber::unopen_card
+                                     << CardNumber::unopen_card
+                                     << CardNumber::unopen_card
+                                     << CardNumber::unopen_card
                                      << (double)(6/50);
-    QTest::addRow("Preflop pair") << Card::diamonds_8
-                                  << Card::hearts_8
-                                  << Card::unopen_card
-                                  << Card::unopen_card
-                                  << Card::unopen_card
-                                  << Card::unopen_card
-                                  << Card::unopen_card
+    QTest::addRow("Preflop pair") << CardNumber::diamonds_8
+                                  << CardNumber::hearts_8
+                                  << CardNumber::unopen_card
+                                  << CardNumber::unopen_card
+                                  << CardNumber::unopen_card
+                                  << CardNumber::unopen_card
+                                  << CardNumber::unopen_card
                                   << 1.0;
 }
 
@@ -86,20 +86,20 @@ void testCalculator::test_tryToCalculatePair_data()
 
 void testCalculator::test_tryToCalculatePair()
 {
-    QFETCH(Card, firstHandCard);
-    QFETCH(Card, secondHandCard);
-    QFETCH(Card, firstFlop);
-    QFETCH(Card, secondFlop);
-    QFETCH(Card, thirdFlop);
-    QFETCH(Card, turn);
-    QFETCH(Card, river);
+    QFETCH(CardNumber, firstHandCard);
+    QFETCH(CardNumber, secondHandCard);
+    QFETCH(CardNumber, firstFlop);
+    QFETCH(CardNumber, secondFlop);
+    QFETCH(CardNumber, thirdFlop);
+    QFETCH(CardNumber, turn);
+    QFETCH(CardNumber, river);
     QFETCH(double, result);
     
-    QVector<Card> handCards;
+    QVector<CardNumber> handCards;
     pushCardsToArray(handCards, firstHandCard);
     pushCardsToArray(handCards, secondHandCard);
     
-    QVector<Card> tableCards;
+    QVector<CardNumber> tableCards;
 
     pushCardsToArray(tableCards, firstFlop);
     pushCardsToArray(tableCards, secondFlop);

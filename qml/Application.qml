@@ -1,76 +1,64 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
+import QtQuick.Controls.Universal
 import "../qml/StyleSettings"
-import "../qml/Templates"
 
-Window {
-    id: root
-    width: 1080
-    height: 960
+ApplicationWindow  {
+    id: window
+    width: 640
+    height: 480
     visible: true
     title: qsTr("Poker Analiser")
     color: Style.backgroundColor
 
-    Table
-    {
-        id: _table
-        anchors.centerIn: parent
+    header: ToolBar {
 
-        width: root.width * 0.7
-        height: root.height * 0.5        
-    }
-    
-    Hand
-    {
-        id: _hand
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            verticalCenter: _table.bottom
-        }
-        visible: false
+        contentHeight: _toolButton.implicitHeight
 
-        height: _table.height * 0.33
-    }
+        Rectangle {
+            color: Style.backgroundColorDark
+            anchors.fill: parent
+            ToolButton {
+                id: _toolButton
+                anchors.right: parent.right
+                property bool isOpened: false
+                text: isOpened ? "▷" : "☰"
+                font.pixelSize: Qt.application.font.pixelSize * 1.6
 
-    Button {
-        id: _button
+                onClicked: {
+                    if(!isOpened) {
+                        isOpened = true
+                        _drawer.open();
+                    }
+                    else {
+                        isOpened = false
+                        _drawer.close();
+                    }
+                }
 
-        width: 100
-        height: 40
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-        property int counter: 0
-        text: "Start"
-        onClicked: {
-            if(counter == 0)
-            {
-                _hand.getHand()
-                _hand.visible = true
-                counter += 2
-            }
-            else if(counter == 2)
-            {
-                _table.getNextTableCard()
-                _table.getNextTableCard()
-                _table.getNextTableCard()
-                counter +=3
-            }
-            else if(counter == 5)
-            {
-                _table.getNextTableCard()
-                counter++
-            }
-            else if(counter == 6)
-            {
-                _table.getNextTableCard()
-                counter++
-            }
-            else {
-                _table.clearTable()
-                counter = 0
-                _hand.visible = false
+                Connections {
+                    target: _drawer
+                    function onClosed() {
+                        _toolButton.isOpened = false
+                    }
+                }
             }
         }
+    }
+
+    AppDrawer {
+        id: _drawer
+
+        width: window.width * 0.33
+        y: header.height
+        height: window.height - header.height
+        edge: Qt.RightEdge        
+    }
+
+    MainFrame {
+        id: _mainFrame
+        width: window.width
+        height: window.height - header.height
     }
 }

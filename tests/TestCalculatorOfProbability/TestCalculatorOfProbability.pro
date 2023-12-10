@@ -9,11 +9,11 @@ TEMPLATE = app
 
 HEADERS += \
     ../../src/CalculatorOfProbability.h \
-    ../../src/CardClass.h
+    ../../src/Cards.h
 
 SOURCES +=  \
     ../../src/CalculatorOfProbability.cpp \
-    ../../src/CardClass.cpp \
+    ../../src/Cards.cpp \
     tst_calculatorOfProbability.cpp
 
 include(../../common.pri)

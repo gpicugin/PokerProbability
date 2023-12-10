@@ -1,5 +1,4 @@
 import QtQuick 2.15
-
 Item {
     id: root
     height: 300
@@ -27,8 +26,8 @@ Item {
     }
 
     function getHand() {
-        _card1.state = GameManager.getCurrentCardName()
-        _card2.state = GameManager.getCurrentCardName()
+        _card1.url = appEngine.getCurrentCard()
+        _card2.url = appEngine.getCurrentCard()
 
     }
 

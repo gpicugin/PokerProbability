@@ -43,7 +43,7 @@ Rectangle
     } 
 
 
-    Item {
+   Item {
 
         anchors {
             centerIn: parent
@@ -53,7 +53,7 @@ Rectangle
         width: 500/726 * height * 7
 
         ListView {
-            id: cardView
+            id: _cardView
             anchors {
                 centerIn: parent
             }
@@ -64,16 +64,18 @@ Rectangle
             model: _cardModel
 
             delegate: Card {
-                id: _delegate
                 height: root.height * 0.33
+                url: cardUrl
             }
         }
+
     }
 
     function getNextTableCard()
     {
-        _cardModel.append({stateOfCard: GameManager.getCurrentCardName()})
+        _cardModel.append({cardUrl : appEngine.getCurrentCard()})
     }
+
     function clearTable()
     {
         _cardModel.clear()

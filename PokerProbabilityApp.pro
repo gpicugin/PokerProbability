@@ -1,5 +1,6 @@
 QT += testlib
 QT += core
+QT += gui
 QT += qml quick widgets
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -8,13 +9,12 @@ QT += qml quick widgets
 
 HEADERS += \
     src/CalculatorOfProbability.h \
-    src/CardClass.h \
-    src/GameManager.h
+    src/AppEngine.h \
+    src/Cards.h
 
 SOURCES += \
     src/CalculatorOfProbability.cpp \
-    src/CardClass.cpp \
-    src/GameManager.cpp \
+    src/AppEngine.cpp \
     src/main.cpp
 
 RESOURCES += \
@@ -35,7 +35,7 @@ include(common.pri)
 
 DEFINES += QT_QML_DEBUG_NO_WARNING
 
-#QMAKE_POST_LINK += windeployqt.exe --qmldir $$QML_DIR $$DESTDIR/PokerProbabilityApp.exe
+QMAKE_POST_LINK += windeployqt.exe --qmldir $$QML_DIR $$DESTDIR/PokerProbabilityApp.exe
 
 
 

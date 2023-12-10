@@ -2,16 +2,17 @@
     <qresource prefix="/">
         <file>qml/StyleSettings/qmldir</file>
         <file>qml/StyleSettings/StyleSettings.qml</file>
-        <file>qml/Templates/ArrayOfCards.qml</file>
         <file>qml/Templates/Card.qml</file>
         <file>qml/Templates/Hand.qml</file>
         <file>qml/Templates/qmldir</file>
         <file>qml/Templates/Table.qml</file>
         <file>qml/Application.qml</file>
-        <file>Cards/10_of_clubs.png</file>
-        <file>Cards/10_of_diamonds.png</file>
-        <file>Cards/10_of_hearts.png</file>
-        <file>Cards/10_of_spades.png</file>
+        <file>qml/ButtonStart.qml</file>
+        <file>qml/resources/menu_button.png</file>
+        <file>qml/MainFrame.qml</file>
+        <file>qml/AppDrawer.qml</file>
+    </qresource>
+    <qresource prefix="/card_images">
         <file>Cards/2_of_clubs.png</file>
         <file>Cards/2_of_diamonds.png</file>
         <file>Cards/2_of_hearts.png</file>
@@ -44,6 +45,10 @@
         <file>Cards/9_of_diamonds.png</file>
         <file>Cards/9_of_hearts.png</file>
         <file>Cards/9_of_spades.png</file>
+        <file>Cards/10_of_clubs.png</file>
+        <file>Cards/10_of_diamonds.png</file>
+        <file>Cards/10_of_hearts.png</file>
+        <file>Cards/10_of_spades.png</file>
         <file>Cards/ace_of_clubs.png</file>
         <file>Cards/ace_of_diamonds.png</file>
         <file>Cards/ace_of_hearts.png</file>
@@ -75,6 +80,5 @@
         <file>Cards/queen_of_spades.png</file>
         <file>Cards/queen_of_spades2.png</file>
         <file>Cards/red_joker.png</file>
-        <file>qml/ButtonStart.qml</file>
     </qresource>
 </RCC>

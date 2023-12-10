@@ -4,8 +4,8 @@
 #include <QLocale>
 #include <QTranslator>
 
-#include "GameManager.h"
-#include "CardClass.h"
+#include "AppEngine.h"
+
 int main(int argc, char *argv[])
 {
     if (qEnvironmentVariableIsEmpty("QTGLESSTREAM_DISPLAY")) {
@@ -17,8 +17,6 @@ int main(int argc, char *argv[])
 #endif
     }
     QGuiApplication app(argc, argv);
-
-    CardClass::declareQML();
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -41,10 +39,11 @@ int main(int argc, char *argv[])
                         QCoreApplication::exit(-1);
                     }, Qt::QueuedConnection);
 
-    GameManager gameManager;
+    AppEngine appEngine;
 
-    engine.rootContext()->setContextProperty("GameManager", &gameManager);
+    engine.rootContext()->setContextProperty("appEngine", &appEngine);
 
+    qRegisterMetaType<Card>();
 
     engine.load(url);
 
