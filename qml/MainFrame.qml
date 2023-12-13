@@ -16,16 +16,10 @@ Rectangle {
         height: root.height * 0.5
     }
 
-    Hand
+    Hands
     {
-        id: _hand
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            verticalCenter: _table.bottom
-        }
-        visible: false
-
-        height: _table.height * 0.33
+        id: _hands
+        anchors.fill: _table
     }
 
     ButtonStart {

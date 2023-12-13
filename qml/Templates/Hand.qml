@@ -1,8 +1,12 @@
 import QtQuick 2.15
+
 Item {
     id: root
     height: 300
     width: 500/726 * height * 2
+    property string url1;
+    property string url2;
+
     Card {
         id: _card1
         anchors {
@@ -10,8 +14,9 @@ Item {
             right: root.horizontalCenter
             rightMargin: root.width * 0.025
             top: root.top
-            bottom: root.bottom
+            bottom: root.bottom            
         }
+        url: url1
     }
 
     Card {
@@ -23,6 +28,7 @@ Item {
             top: root.top
             bottom: root.bottom
         }
+        url: url2
     }
 
     function getHand() {

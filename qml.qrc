@@ -11,6 +11,7 @@
         <file>qml/resources/menu_button.png</file>
         <file>qml/MainFrame.qml</file>
         <file>qml/AppDrawer.qml</file>
+        <file>qml/Templates/Hands.qml</file>
     </qresource>
     <qresource prefix="/card_images">
         <file>Cards/2_of_clubs.png</file>

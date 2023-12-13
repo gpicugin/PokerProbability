@@ -10,11 +10,13 @@ QT += qml quick widgets
 HEADERS += \
     src/CalculatorOfProbability.h \
     src/AppEngine.h \
-    src/Cards.h
+    src/Cards.h \
+    src/HandsModel.h
 
 SOURCES += \
     src/CalculatorOfProbability.cpp \
     src/AppEngine.cpp \
+    src/HandsModel.cpp \
     src/main.cpp
 
 RESOURCES += \
@@ -36,6 +38,20 @@ include(common.pri)
 DEFINES += QT_QML_DEBUG_NO_WARNING
 
 QMAKE_POST_LINK += windeployqt.exe --qmldir $$QML_DIR $$DESTDIR/PokerProbabilityApp.exe
+
+DISTFILES += \
+    qml/AppDrawer.qml \
+    qml/Application.qml \
+    qml/ButtonStart.qml \
+    qml/MainFrame.qml \
+    qml/StyleSettings/StyleSettings.qml \
+    qml/StyleSettings/qmldir \
+    qml/Templates/Card.qml \
+    qml/Templates/Hand.qml \
+    qml/Templates/Hands.qml \
+    qml/Templates/Table.qml \
+    qml/Templates/qmldir \
+    qml/resources/menu_button.png
 
 
 

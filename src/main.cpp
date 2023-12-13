@@ -5,6 +5,7 @@
 #include <QTranslator>
 
 #include "AppEngine.h"
+#include "HandsModel.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,6 +29,8 @@ int main(int argc, char *argv[])
         }
     }
 
+    qmlRegisterType<HandsModel>("Hands", 1, 0, "HandsModel");
+
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/qml/Application.qml"));
     QObject::connect(&engine,
@@ -42,8 +45,6 @@ int main(int argc, char *argv[])
     AppEngine appEngine;
 
     engine.rootContext()->setContextProperty("appEngine", &appEngine);
-
-    qRegisterMetaType<Card>();
 
     engine.load(url);
 

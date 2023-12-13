@@ -10,6 +10,13 @@ AppEngine::AppEngine(QObject *parent)
     {
         m_desc << (CardNumber)(i);
     }
+    m_playersCounter = 1;
+
+
+    //m_hands.resize(m_playersCounter);
+    for(int i = 0; i < m_playersCounter; i++) {
+       // m_hands[i].resize(2);
+    }
 }
 
 AppEngine::~AppEngine()
@@ -17,13 +24,19 @@ AppEngine::~AppEngine()
 
 }
 
-QString AppEngine::getCurrentCard()
+void AppEngine::doNextStep()
 {
-    pullNewCardFromDesc();
-    return cards.value(m_currentCard).m_url;
+    for(int i = 0; i < m_playersCounter; i++)
+    {
+        pullCurrentCard();
+        QString url1 = getCurrentCardUrl();
+        pullCurrentCard();
+        QString url2 = getCurrentCardUrl();
+        emit newHand(url1, url2);
+    }
 }
 
-void AppEngine::pullNewCardFromDesc()
+void AppEngine::pullCurrentCard()
 {
     QRandomGenerator rand;
     int randomValue = rand.generate() % 53;
@@ -36,7 +49,40 @@ void AppEngine::pullNewCardFromDesc()
             break;
         }
         else
-           randomValue = rand.generate() % 53;
+            randomValue = rand.generate() % 53;
     }
 }
+
+QString AppEngine::getCurrentCardUrl()
+{
+    QString url = cards.value(m_currentCard).m_url;
+    emit newPulledCardUrl(url);
+    return url;
+}
+
+
+
+// QVector<double> getProbabilities()
+// {
+//     QVector<double> result;
+//     return result;
+//     // static int cardsCounter = 0;
+//     // pullNewCardFromDesc();
+
+//     // if(cardsCounter < 2 * m_playersCounter)
+//     //     m_hands[cardsCounter / 2][cardsCounter % 2] = m_currentCard;
+//     // else
+//     //     m_tableDesc.push_back(m_currentCard);
+
+
+
+//     // if(cardsCounter == 2 * m_playersCounter + 4)
+//     //     cardsCounter = 0;
+//     // else
+//     //     cardsCounter++;
+// }
+
+
+
+
 
