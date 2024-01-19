@@ -6,6 +6,7 @@
 
 #include "AppEngine.h"
 #include "HandsModel.h"
+#include "TableModel.h"
 
 int main(int argc, char *argv[])
 {
@@ -30,6 +31,8 @@ int main(int argc, char *argv[])
     }
 
     qmlRegisterType<HandsModel>("Hands", 1, 0, "HandsModel");
+    qmlRegisterType<TableModel>("Table", 1, 0, "TableModel");
+
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/qml/Application.qml"));
@@ -43,7 +46,6 @@ int main(int argc, char *argv[])
                     }, Qt::QueuedConnection);
 
     AppEngine appEngine;
-
     engine.rootContext()->setContextProperty("appEngine", &appEngine);
 
     engine.load(url);

@@ -11,12 +11,14 @@ HEADERS += \
     src/CalculatorOfProbability.h \
     src/AppEngine.h \
     src/Cards.h \
-    src/HandsModel.h
+    src/HandsModel.h \
+    src/TableModel.h
 
 SOURCES += \
     src/CalculatorOfProbability.cpp \
     src/AppEngine.cpp \
     src/HandsModel.cpp \
+    src/TableModel.cpp \
     src/main.cpp
 
 RESOURCES += \

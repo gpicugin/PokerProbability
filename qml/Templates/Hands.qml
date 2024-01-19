@@ -37,5 +37,8 @@ Item {
         {
             _handsModel.add(url1, url2)
         }
+        function onTableHasCleared() {
+            _handsModel.clear()
+        }
     }
 }

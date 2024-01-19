@@ -8,33 +8,38 @@
 #include <QPair>
 #include "Cards.h"
 #include "CalculatorOfProbability.h"
-#include "HandsModel.h"
 
 class AppEngine : public QObject
 {
     Q_OBJECT
 public:
     explicit AppEngine(QObject *parent = nullptr);
-    ~AppEngine();    
+    ~AppEngine();
 
-private:    
-    int                             m_playersCounter;
-    CardNumber                      m_currentCard;
-    //QVector<QPair<CardNumber>>    m_handCards;
-    QVector<CardNumber>             m_tableCards;
-    QSet<CardNumber>                m_desc;
-    CalculatorOfProbability         m_calc;
-    HandsModel                      m_handsModel;
+private:
+    int                       m_playersCounter;
+    int                       m_stepNumber;
+    Card                      m_currentCard;
+    QVector<Card>             m_tableCards;
+    QSet<CardNumber>          m_desc;
+    QSet<CardNumber>          m_descBackUp;
+    CalculatorOfProbability   m_calc;
+
+    enum {
+        preFlop = 0,
+        flop,
+        river,
+        turn,
+        end
+    };
 
 public slots:
-    void            pullCurrentCard();
-    QString         getCurrentCardUrl();
-    //QVector<double> getProbabilities();
+    CardNumber      pullCurrentCard();
     void            doNextStep();
 
-
 signals:
-    void    newPulledCardUrl(QString url);
+    void    tableHasChanged(Card card);
+    void    tableHasCleared();
     void    newHand(QString url1, QString url2);
 };
 

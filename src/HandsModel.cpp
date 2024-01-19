@@ -12,7 +12,6 @@ int HandsModel::rowCount(const QModelIndex &parent) const
     if (parent.isValid())
         return 0;
 
-    // FIXME: Implement me!
     return m_hands.size();
 }
 
@@ -23,9 +22,9 @@ QVariant HandsModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case firstCardURLRole:
-        return QVariant(m_hands[index.row()].firstCardURL);
+        return QVariant(m_hands[index.row()].firstCardURl);
     case secondCardURLRole:
-        return QVariant(m_hands[index.row()].secondCardUrl);
+        return QVariant(m_hands[index.row()].secondCardURL);
     }
 
     return QVariant();
@@ -37,9 +36,10 @@ bool HandsModel::setData(const QModelIndex &index, const QVariant &value, int ro
         switch (role)
         {
         case firstCardURLRole:
-            m_hands[index.row()].firstCardURL = value.toString();
+            m_hands[index.row()].firstCardURl = value.toString();
+            break;
         case secondCardURLRole:
-            m_hands[index.row()].secondCardUrl = value.toString();
+            m_hands[index.row()].secondCardURL = value.toString();
             break;
         default:
             return false;
@@ -55,19 +55,28 @@ Qt::ItemFlags HandsModel::flags(const QModelIndex &index) const
     if (!index.isValid())
         return Qt::NoItemFlags;
 
-    return Qt::ItemIsEditable; // FIXME: Implement me!
+    return Qt::ItemIsEditable;
 }
 
-void HandsModel::add(QString url1, QString url2)
+void HandsModel::add(QString firstURL, QString secondURL)
 {
     beginInsertRows(QModelIndex(), m_hands.size(), m_hands.size());
-    Hand hand(url1, url2);
+    Hand hand;
+    hand.firstCardURl  = firstURL;
+    hand.secondCardURL = secondURL;
     m_hands.append(hand);
     endInsertRows();
 
     // m_hands[0] = QString("Size: %1").arg(m_hands.size());
     // QModelIndex index = createIndex(0, 0, static_cast<void *>(0));
     // emit dataChanged(index, index);
+}
+
+void HandsModel::clear()
+{
+    beginRemoveRows(QModelIndex(), 0, m_hands.size() -1);
+    m_hands.clear();
+    endRemoveRows();
 }
 
 QHash<int, QByteArray> HandsModel::roleNames() const

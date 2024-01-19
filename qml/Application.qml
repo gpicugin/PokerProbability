@@ -23,8 +23,15 @@ ApplicationWindow  {
                 id: _toolButton
                 anchors.right: parent.right
                 property bool isOpened: false
-                text: isOpened ? "▷" : "☰"
-                font.pixelSize: Qt.application.font.pixelSize * 1.6
+                Text {
+                    text: _toolButton.isOpened ? "▶" : "☰"
+                    color: "white"
+                    anchors.centerIn: parent
+                    verticalAlignment:      Qt.AlignVCenter
+                    horizontalAlignment:    Qt.AlignHCenter
+                    font.pixelSize: Qt.application.font.pixelSize * 3.5
+                }
+
 
                 onClicked: {
                     if(!isOpened) {

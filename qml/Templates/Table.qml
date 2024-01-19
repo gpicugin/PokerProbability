@@ -1,4 +1,5 @@
 import QtQuick 2.15
+import Table 1.0
 import "../StyleSettings"
 
 Rectangle
@@ -9,7 +10,7 @@ Rectangle
     border.color: Style.tableBorderColor
     signal indexChanged
     anchors.centerIn: parent
-    property alias _cardModel: _cardModel
+    property alias _tableModel: _tableModel
 
     width: 300
     height: 100
@@ -38,13 +39,11 @@ Rectangle
         orientation: Gradient.Vertical
     }
 
-    ListModel {
-        id: _cardModel
-    } 
 
 
-   Item {
 
+    Item {
+        id: _contayner
         anchors {
             centerIn: parent
         }
@@ -52,35 +51,39 @@ Rectangle
         height: root.height * 0.33
         width: 500/726 * height * 7
 
+        property int cardWidth: 500/726 * height;
+        property int space: cardWidth * 0.2;
+
+
         ListView {
-            id: _cardView
+            id: _tableView
             anchors {
                 centerIn: parent
             }
-            height: root.height * 0.33
-            width: (_cardModel.count === 1) ? 500/726 * height : _cardModel.count * 500/726 * height + (_cardModel.count - 1) * 500/726 * height * 0.2
-            spacing: parent.height * 500/726 * 0.2
-            orientation: ListView.Horizontal
-            model: _cardModel
-
+            height: parent.height
+            width: parent.width
+            orientation: ListView.Horizontal            
+            spacing: _contayner.space
+            model:  TableModel {
+                id: _tableModel
+            }
+            Connections {
+                target: appEngine
+                function onTableHasChanged(Card) {
+                    _tableModel.add(Card);
+                }
+                function onTableHasCleared() {
+                    _tableModel.clear();
+                }
+            }
             delegate: Card {
-                height: root.height * 0.33
-                url: cardUrl
+                id: _card
+                height: _contayner.height
+                url: model.url                
             }
         }
 
     }
-
-    function getNextTableCard()
-    {
-        _cardModel.append({cardUrl : appEngine.getCurrentCard()})
-    }
-
-    function clearTable()
-    {
-        _cardModel.clear()
-    }
-
 }
 
 

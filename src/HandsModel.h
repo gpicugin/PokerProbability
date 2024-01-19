@@ -2,13 +2,16 @@
 #define HANDSMODEL_H
 
 #include <QAbstractListModel>
+#include "Cards.h"
 
 struct Hand {
-    QString firstCardURL;
-    QString secondCardUrl;
-    Hand(QString url1, QString url2) {
-        firstCardURL    = url1;
-        secondCardUrl   = url2;
+    Card m_firstCard;
+    Card m_secondCard;
+    QString firstCardURl;
+    QString secondCardURL;
+    Hand() : firstCardURl(m_firstCard.m_URL),
+        secondCardURL(m_secondCard.m_URL)
+    {
     }
 };
 
@@ -39,7 +42,8 @@ public:
     virtual QHash<int, QByteArray> roleNames() const override;
 
     Q_INVOKABLE void add(QString url1, QString url2);
-
+public slots:
+    void clear();
 private:
     QVector<Hand> m_hands;
 };

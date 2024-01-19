@@ -1,7 +1,7 @@
 #include "AppEngine.h"
 #include <QRandomGenerator>
 #include <QDebug>
-
+#include <TableModel.h>
 AppEngine::AppEngine(QObject *parent)
     : QObject{parent},
     m_currentCard(CardNumber::unopen_card)
@@ -9,14 +9,11 @@ AppEngine::AppEngine(QObject *parent)
     for(int i = 0; i < CardNumber::size; i++)
     {
         m_desc << (CardNumber)(i);
+        m_descBackUp << (CardNumber)(i);
     }
     m_playersCounter = 1;
+    m_stepNumber = preFlop;
 
-
-    //m_hands.resize(m_playersCounter);
-    for(int i = 0; i < m_playersCounter; i++) {
-       // m_hands[i].resize(2);
-    }
 }
 
 AppEngine::~AppEngine()
@@ -26,17 +23,54 @@ AppEngine::~AppEngine()
 
 void AppEngine::doNextStep()
 {
-    for(int i = 0; i < m_playersCounter; i++)
-    {
-        pullCurrentCard();
-        QString url1 = getCurrentCardUrl();
-        pullCurrentCard();
-        QString url2 = getCurrentCardUrl();
-        emit newHand(url1, url2);
+
+    switch (m_stepNumber) {
+    case preFlop: {
+        for(int i = 0; i < m_playersCounter; i++)
+        {
+            QString url1 = cards.value(pullCurrentCard());
+            QString url2 = cards.value(pullCurrentCard());
+            emit newHand(url1, url2);
+        }
+        break;
     }
+    case flop: {
+        for(int i = 0; i < 3; i++) {
+            Card card(pullCurrentCard());
+            m_tableCards << card;
+            emit tableHasChanged(card);
+        }
+        break;
+    }
+    case river: {
+        Card card(pullCurrentCard());
+        m_tableCards << card;
+        emit tableHasChanged(card);
+        break;
+    }
+    case turn: {
+        Card card(pullCurrentCard());
+        m_tableCards << card;
+        emit tableHasChanged(card);
+        break;
+    }
+    case end: {
+        m_tableCards.clear();
+        emit tableHasCleared();
+        break;
+    }
+    default:
+        break;
+    }
+    if(m_stepNumber == end) {
+        m_stepNumber = preFlop;
+        m_desc = m_descBackUp;
+    }
+    else
+        m_stepNumber++;
 }
 
-void AppEngine::pullCurrentCard()
+CardNumber AppEngine::pullCurrentCard()
 {
     QRandomGenerator rand;
     int randomValue = rand.generate() % 53;
@@ -45,43 +79,13 @@ void AppEngine::pullCurrentCard()
     {
         if( m_desc.remove((CardNumber)(randomValue)) )
         {
-            m_currentCard = (CardNumber)(randomValue);
+            return (CardNumber)(randomValue);
             break;
         }
         else
             randomValue = rand.generate() % 53;
     }
 }
-
-QString AppEngine::getCurrentCardUrl()
-{
-    QString url = cards.value(m_currentCard).m_url;
-    emit newPulledCardUrl(url);
-    return url;
-}
-
-
-
-// QVector<double> getProbabilities()
-// {
-//     QVector<double> result;
-//     return result;
-//     // static int cardsCounter = 0;
-//     // pullNewCardFromDesc();
-
-//     // if(cardsCounter < 2 * m_playersCounter)
-//     //     m_hands[cardsCounter / 2][cardsCounter % 2] = m_currentCard;
-//     // else
-//     //     m_tableDesc.push_back(m_currentCard);
-
-
-
-//     // if(cardsCounter == 2 * m_playersCounter + 4)
-//     //     cardsCounter = 0;
-//     // else
-//     //     cardsCounter++;
-// }
-
 
 
 
