@@ -4,16 +4,7 @@
 #include <QAbstractListModel>
 #include "Cards.h"
 
-struct Hand {
-    Card m_firstCard;
-    Card m_secondCard;
-    QString firstCardURl;
-    QString secondCardURL;
-    Hand() : firstCardURl(m_firstCard.m_URL),
-        secondCardURL(m_secondCard.m_URL)
-    {
-    }
-};
+
 
 class HandsModel : public QAbstractListModel
 {

@@ -49,7 +49,7 @@ Rectangle
         }
 
         height: root.height * 0.33
-        width: 500/726 * height * 7
+        width: 500/726 * height * 5.7
 
         property int cardWidth: 500/726 * height;
         property int space: cardWidth * 0.2;
@@ -82,7 +82,6 @@ Rectangle
                 url: model.url                
             }
         }
-
     }
 }
 

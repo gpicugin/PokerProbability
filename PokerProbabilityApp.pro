@@ -12,12 +12,14 @@ HEADERS += \
     src/AppEngine.h \
     src/Cards.h \
     src/HandsModel.h \
+    src/MyMath.h \
     src/TableModel.h
 
 SOURCES += \
     src/CalculatorOfProbability.cpp \
     src/AppEngine.cpp \
     src/HandsModel.cpp \
+    src/MyMath.cpp \
     src/TableModel.cpp \
     src/main.cpp
 
@@ -39,7 +41,7 @@ include(common.pri)
 
 DEFINES += QT_QML_DEBUG_NO_WARNING
 
-QMAKE_POST_LINK += windeployqt.exe --qmldir $$QML_DIR $$DESTDIR/PokerProbabilityApp.exe
+# QMAKE_POST_LINK += windeployqt.exe --qmldir $$QML_DIR $$DESTDIR/PokerProbabilityApp.exe
 
 DISTFILES += \
     qml/AppDrawer.qml \

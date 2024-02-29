@@ -13,7 +13,7 @@ ApplicationWindow  {
     color: Style.backgroundColor
 
     header: ToolBar {
-
+        id: _toolBar
         contentHeight: _toolButton.implicitHeight
 
         Rectangle {
@@ -34,7 +34,8 @@ ApplicationWindow  {
 
 
                 onClicked: {
-                    if(!isOpened) {
+                    if(!isOpened)
+                    {
                         isOpened = true
                         _drawer.open();
                     }
@@ -43,29 +44,39 @@ ApplicationWindow  {
                         _drawer.close();
                     }
                 }
-
-                Connections {
-                    target: _drawer
-                    function onClosed() {
-                        _toolButton.isOpened = false
-                    }
-                }
             }
         }
     }
 
     AppDrawer {
         id: _drawer
-
+        height: window.height - header.height
         width: window.width * 0.33
         y: header.height
-        height: window.height - header.height
         edge: Qt.RightEdge        
     }
 
     MainFrame {
         id: _mainFrame
-        width: window.width
         height: window.height - header.height
+        width: window.width
+        Connections {
+            target: _drawer
+
+            function onXChanged() {
+                _mainFrame.width = _drawer.x
+            }
+            function onClosed() {
+                _mainFrame.width = window.width
+            }
+        }
+        Connections {
+            target: window
+
+            function onWidthChanged() {
+                if(!_drawer.opened)
+                    _mainFrame.width = window.width
+            }
+        }
     }
 }

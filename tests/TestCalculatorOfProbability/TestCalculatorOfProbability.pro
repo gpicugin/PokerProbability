@@ -9,10 +9,12 @@ TEMPLATE = app
 
 HEADERS += \
     ../../src/CalculatorOfProbability.h \
+    ../../src/MyMath.h \
     ../../src/Cards.h
 
 SOURCES +=  \
     ../../src/CalculatorOfProbability.cpp \
+    ../../src/MyMath.cpp \
     ../../src/Cards.cpp \
     tst_calculatorOfProbability.cpp
 

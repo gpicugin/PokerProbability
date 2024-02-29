@@ -20,10 +20,12 @@ private:
     int                       m_playersCounter;
     int                       m_stepNumber;
     Card                      m_currentCard;
-    QVector<Card>             m_tableCards;
+    QVector<CardNumber>       m_handCards;
+    QVector<CardNumber>       m_tableCards;
     QSet<CardNumber>          m_desc;
     QSet<CardNumber>          m_descBackUp;
     CalculatorOfProbability   m_calc;
+    QVector<double>           m_probArr;
 
     enum {
         preFlop = 0,
@@ -33,14 +35,16 @@ private:
         end
     };
 
+    void pullCardOnTable();
 public slots:
     CardNumber      pullCurrentCard();
     void            doNextStep();
-
+    void            calculateTable(QVector<CardNumber> cards = {});
 signals:
+    void    newHand(QString url1, QString url2);
     void    tableHasChanged(Card card);
     void    tableHasCleared();
-    void    newHand(QString url1, QString url2);
+    void    probTableHasChanged(QVector<double> probArr);
 };
 
 #endif // APP_ENGINE_H

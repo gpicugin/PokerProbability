@@ -22,9 +22,9 @@ QVariant HandsModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case firstCardURLRole:
-        return QVariant(m_hands[index.row()].firstCardURl);
+        return QVariant(m_hands[index.row()].m_firstCard.m_URL);
     case secondCardURLRole:
-        return QVariant(m_hands[index.row()].secondCardURL);
+        return QVariant(m_hands[index.row()].m_secondCard.m_URL);
     }
 
     return QVariant();
@@ -36,10 +36,10 @@ bool HandsModel::setData(const QModelIndex &index, const QVariant &value, int ro
         switch (role)
         {
         case firstCardURLRole:
-            m_hands[index.row()].firstCardURl = value.toString();
+            m_hands[index.row()].m_firstCard.m_URL = value.toString();
             break;
         case secondCardURLRole:
-            m_hands[index.row()].secondCardURL = value.toString();
+            m_hands[index.row()].m_secondCard.m_URL = value.toString();
             break;
         default:
             return false;
@@ -62,8 +62,8 @@ void HandsModel::add(QString firstURL, QString secondURL)
 {
     beginInsertRows(QModelIndex(), m_hands.size(), m_hands.size());
     Hand hand;
-    hand.firstCardURl  = firstURL;
-    hand.secondCardURL = secondURL;
+    hand.m_firstCard.m_URL  = firstURL;
+    hand.m_secondCard.m_URL = secondURL;
     m_hands.append(hand);
     endInsertRows();
 

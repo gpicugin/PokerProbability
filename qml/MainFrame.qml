@@ -29,15 +29,5 @@ Rectangle {
 
         width: 100
         height: 40
-    }
-
-    //width: window.width - _drawer.width
-
-    Connections {
-        target: _drawer
-
-        function onXChanged() {
-            _mainFrame.width = _drawer.x
-        }
-    }
+    } 
 }

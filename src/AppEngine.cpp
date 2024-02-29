@@ -6,7 +6,7 @@ AppEngine::AppEngine(QObject *parent)
     : QObject{parent},
     m_currentCard(CardNumber::unopen_card)
 {
-    for(int i = 0; i < CardNumber::size; i++)
+    for(int i = 0; i < CardNumber::sizeOfDesc; i++)
     {
         m_desc << (CardNumber)(i);
         m_descBackUp << (CardNumber)(i);
@@ -23,39 +23,38 @@ AppEngine::~AppEngine()
 
 void AppEngine::doNextStep()
 {
-
+    static QVector<CardNumber> mainPlayerHand;
     switch (m_stepNumber) {
     case preFlop: {
-        for(int i = 0; i < m_playersCounter; i++)
+        for(int i = 0; i < m_playersCounter * 2; i++)
         {
-            QString url1 = cards.value(pullCurrentCard());
-            QString url2 = cards.value(pullCurrentCard());
-            emit newHand(url1, url2);
+            m_handCards << pullCurrentCard() << pullCurrentCard();
+            if( i % 2 == 1)
+            {
+                QString url1 = cards.value(m_handCards[i-1]);
+                QString url2 = cards.value(m_handCards[i]);
+                emit newHand(url1, url2);
+            }
         }
+        mainPlayerHand = { m_handCards[0], m_handCards[1] };
         break;
     }
     case flop: {
-        for(int i = 0; i < 3; i++) {
-            Card card(pullCurrentCard());
-            m_tableCards << card;
-            emit tableHasChanged(card);
-        }
+        for(int i = 0; i < 3; i++)
+            pullCardOnTable();
         break;
     }
     case river: {
-        Card card(pullCurrentCard());
-        m_tableCards << card;
-        emit tableHasChanged(card);
+        pullCardOnTable();
         break;
     }
     case turn: {
-        Card card(pullCurrentCard());
-        m_tableCards << card;
-        emit tableHasChanged(card);
+        pullCardOnTable();
         break;
     }
     case end: {
         m_tableCards.clear();
+        mainPlayerHand.clear();
         emit tableHasCleared();
         break;
     }
@@ -68,12 +67,27 @@ void AppEngine::doNextStep()
     }
     else
         m_stepNumber++;
+
+    calculateTable(mainPlayerHand + m_tableCards);
+}
+
+void AppEngine::calculateTable(QVector<CardNumber> cards)
+{
+    m_probArr = m_calc.CalculateAll(cards);
+    emit probTableHasChanged(m_probArr);
+}
+
+void AppEngine::pullCardOnTable()
+{
+    Card card(pullCurrentCard());
+    m_tableCards << card.m_name;
+    emit tableHasChanged(card);
 }
 
 CardNumber AppEngine::pullCurrentCard()
 {
-    QRandomGenerator rand;
-    int randomValue = rand.generate() % 53;
+    QRandomGenerator rand = QRandomGenerator::securelySeeded();
+    int randomValue = rand.generate() % 52;
 
     while(1)
     {
@@ -83,7 +97,7 @@ CardNumber AppEngine::pullCurrentCard()
             break;
         }
         else
-            randomValue = rand.generate() % 53;
+            randomValue = rand.generate() % 52;
     }
 }
 

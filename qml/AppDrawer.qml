@@ -4,6 +4,10 @@ import Qt.labs.qmlmodels
 import "../qml/StyleSettings"
 
 Drawer {
+    interactive: true
+    modal: false
+    closePolicy: Popup.NoAutoClose
+
 
     Rectangle {
 
@@ -12,6 +16,7 @@ Drawer {
         color: Style.backgroundColorDark
 
         TableView {
+            id: _tableView
 
             anchors.fill: parent
             columnSpacing: 1
@@ -28,7 +33,7 @@ Drawer {
                 },
                 {
                     "combo":        "One Pair",
-                    "probability":  "0.0"
+                    "probability":  "0.06"
                 },
                 {
                     "combo":        "Two Pairs",
@@ -81,6 +86,24 @@ Drawer {
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: root.width / 12
                 }
+            }
+
+            Component.onCompleted:
+            {
+                appEngine.calculateTable();
+            }
+
+            Connections {
+                target: appEngine
+                function onProbTableHasChanged(arr)
+                {
+                    for(var i = 0; i < 10; i++)
+                    {
+                        var index = _tableView.model.index(i, 1)
+                        _tableView.model.setData(index, "display", arr[i].toString())
+                    }
+                }
+
             }
         }
     }

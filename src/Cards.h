@@ -65,7 +65,7 @@ enum CardNumber {
     spades_ace = 51,
     shirt_card = 52,
     unopen_card = 53,
-    size = 54
+    sizeOfDesc = 54
 };
 
 static QMap<CardNumber, QString> cards = {
@@ -135,6 +135,12 @@ struct Card {
         m_name  = number;
         m_URL   = cards.value(m_name);
     }
+};
+
+struct Hand {
+    Card m_firstCard;
+    Card m_secondCard;
+
 };
 
 
